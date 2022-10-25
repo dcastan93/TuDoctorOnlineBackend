@@ -24,3 +24,5 @@ app.get("/", (request, response)=>{
     response.send("API iniciado, arrancamos")
 })
 app.use("/especialidades", require("./routers/EspecialidadRutas"))
+app.use("/doctores", require("./routers/DoctorRutas"))
+
