@@ -8,6 +8,7 @@ EspecialidadOperaciones.crearEspecialidad = async(req, res)=>{
         const objeto = req.body;
         const especialidad = new EspecialidadModelo(objeto);
         const especialidadGuardada = await especialidad.save();
+        res.status(201).send(especialidadGuardada)
     }catch (error) {
         res.status(400).send("Mala peticion");
     }

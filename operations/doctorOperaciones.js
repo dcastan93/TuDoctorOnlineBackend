@@ -9,6 +9,7 @@ doctorOperaciones.crearDoctor = async(req, res)=>{
         console.log(objeto)
         const doctor = new doctorModelo(objeto);
         const doctorGuardado = await doctor.save();
+        res.status(201).send(doctorGuardado)
     }catch (error) {
         res.status(400).send("Mala peticion");
     }

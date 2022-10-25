@@ -3,8 +3,11 @@ const doctorSchema = mongoose.Schema({
     nombre_Doctor:{type: String, maxLenght: 400, require: true},
     apellidos_Doctor:{type: String, maxLenght: 400, require: true},
     especialidad:{type: String, maxLenght: 400, require: true},
-    //disponibilidadHoraria: , //acá va 
-    telefono_Contacto: {type: String, maxLenght: 400, require: true },
-    email:{type: String, maxLenght: 400, required: true}
+    disponibilidad_Horaria:{type: [String], maxLength: 20, require: true}, //acá va 
+    telefono_Contacto: {type: String, maxLenght: 400, require: true, unique: true },
+    email:{type: String, maxLenght: 400, required: true, unique: true},
+    login:{type: String, maxLenght: 400, required: true, unique: true},
+    password:{type: String, maxLenght: 400, required: true},
+
 });
 module.exports = mongoose.model("doctores", doctorSchema);
