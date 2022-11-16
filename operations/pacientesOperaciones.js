@@ -1,13 +1,17 @@
 //se crean los metodos CRUD
 const pacientesModelo = require("../models/pacientesModelo")
-
+const bcrypt = require("bcrypt");
 const pacientesOperaciones= {};
-
+const cifrarPassword = async (passw) => {
+    const SALT_TIMES = 10;
+    const salt = await bcrypt.genSalt(SALT_TIMES);
+    return await bcrypt.hash(passw, salt);
+}
 pacientesOperaciones.crearPaciente = async(req, res)=>{
     try{
-        const objeto = req.body;
-        console.log(objeto)
-        const paciente = new pacientesModelo(objeto);
+        const body = req.body;
+        body.passw = await cifrarPassword(body.passw);
+        const paciente = new pacientesModelo(body);
         const pacienteGuardado = await paciente.save();
         res.status(201).send(pacienteGuardado)
     }catch (error) {
@@ -42,11 +46,28 @@ pacientesOperaciones.consultarPaciente = async(req, res)=>{
 }
 
 pacientesOperaciones.modificarPacientes = async(req, res)=>{
-    
+    try{
+        const id = req.params.id;
+        const body = req.body;
+        if (body.passw != null) {
+            body.passw = await cifrarPassword(body.passw);
+        }
+        const paciente = {
+            //estaos son los campos que puedo modificar
+            nombre_Paciente: body.nombre_Paciente,
+            apellidos_Paciente: body.apellidos_Paciente,
+            direccion: body.direccion,
+            email: body.email,
+            telefono_Contacto: body.telefono_Contacto,
+            passw: body.passw,
+            es_admin: body.es_admin
+        }
+        const doctorActualizado = await doctorModelo.findByIdAndUpdate(id, doctor, {new: true});
+        res.status(200).send(doctorActualizado)
+    }catch(error){
+        res.status(400).send("Mala petición "+error)
+    }
 }
 
-pacientesOperaciones.borrarDoctor = async(req, res)=>{
-    
-}
 
 module.exports = pacientesOperaciones;

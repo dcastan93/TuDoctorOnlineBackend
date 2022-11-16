@@ -7,7 +7,8 @@ const doctorSchema = mongoose.Schema({
     telefono_Contacto: {type: String, maxLenght: 400, require: true, unique: true },
     email:{type: String, maxLenght: 400, required: true, unique: true},
     login:{type: String, maxLenght: 400, required: true, unique: true},
-    password:{type: String, maxLenght: 400, required: true},
+    passw: {type: String, require: true},
+    es_admin: { type: Boolean, require: true}
 
 });
 module.exports = mongoose.model("doctores", doctorSchema);

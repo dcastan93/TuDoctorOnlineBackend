@@ -1,6 +1,5 @@
 //se crean los metodos CRUD
 const especialidadModelo = require("../models/especialidadModelo");
-const EspecialidadModelo = require("../models/especialidadModelo")
 
 const EspecialidadOperaciones= {};
 
@@ -22,6 +21,7 @@ EspecialidadOperaciones.consultarEspecialidades = async(req, res)=>{
         listaEspecialidades = await EspecialidadModelo.find({
             "$or":[
                 {"nombreEspecialidad": {$regex:filtro.nombreEspecialidad, $options:"i"}}
+                
             ]
         });
     }else{
@@ -77,7 +77,7 @@ EspecialidadOperaciones.borrarEspecialidad = async(req, res)=>{
         const especialidadBorrada = await especialidadModelo.findByIdAndDelete(id);
         res.status(200).send(especialidadBorrada)
     }catch(error){
-        res.status(400).sen("Mala petición "+error)
+        res.status(400).send("Mala petición "+error)
     }
 }
 
