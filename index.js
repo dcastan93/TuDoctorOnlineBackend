@@ -26,7 +26,8 @@ app.get("/", (request, response)=>{
 app.use("/especialidades", require("./routers/EspecialidadRutas"))
 app.use("/doctores", require("./routers/DoctorRutas"))
 app.use("/pacientes", require("./routers/PacienteRutas"))
-app.use("/pacientes", require("./routers/CitasRutas"))
+app.use("/citas", require("./routers/CitasRutas"))
+app.use("/login", require("./routers/LoginRutas"))
 
 
 
