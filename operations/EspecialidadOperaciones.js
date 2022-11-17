@@ -1,6 +1,6 @@
 //se crean los metodos CRUD
 const especialidadModelo = require("../models/especialidadModelo");
-
+const EspecialidadModelo = require("../models/especialidadModelo")
 const EspecialidadOperaciones= {};
 
 EspecialidadOperaciones.crearEspecialidad = async(req, res)=>{
